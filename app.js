@@ -14,10 +14,10 @@ function getVideoIdFromPath() {
 const videoId = getVideoIdFromPath();
 
 if (!videoId) {
-  window.open(`https://sites.google.com/view/bhg-universal-studio`, "_blank");
-  return;
-}
-else {
+  loader.style.display = "none";
+  // Redirect to the specified website if no video ID is found
+  window.location.replace("https://sites.google.com/view/bhg-universal-studio");
+} else {
   /* Thumbnail (UI only) */
   const thumbUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
   thumbnail.style.backgroundImage = `url(${thumbUrl})`;
