@@ -42,23 +42,22 @@ if (!videoId) {
 
 /* 🔊 CUSTOM MUTE / UNMUTE */
 muteBtn.addEventListener("click", () => {
-  if (!player || !player.contentWindow) return;
+  if (!videoId) return;
 
-  if (isMuted) {
-    player.contentWindow.postMessage(
-      '{"event":"command","func":"unMute","args":""}',
-      "*"
-    );
-    muteBtn.textContent = "🔊";
-  } else {
-    player.contentWindow.postMessage(
-      '{"event":"command","func":"mute","args":""}',
-      "*"
-    );
-    muteBtn.textContent = "🔇";
-  }
+  // 🔥 USER-INITIATED RESTART WITH SOUND
+  player.src =
+    `https://www.youtube.com/embed/${videoId}` +
+    `?autoplay=1` +
+    `&mute=0` +
+    `&playsinline=1` +
+    `&controls=0` +
+    `&rel=0` +
+    `&modestbranding=1` +
+    `&iv_load_policy=3` +
+    `&fs=0` +
+    `&disablekb=1`;
 
-  isMuted = !isMuted;
+  muteBtn.style.display = "none"; // optional: hide after use
 });
 
 /* External credit (policy safe) */
