@@ -59,33 +59,8 @@ iframe {
   to { transform: rotate(360deg); }
 }
 
-/* 🔒 CLICK BLOCKER */
-/* 🔒 PARTIAL CLICK BLOCKERS (TEST MODE VISIBLE) */
-
-.blocker {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  z-index: 4;
-}
-
-/* Top 30% blocked */
-.top-block {
-  top: 0;
-  
-  height: 15%;
-  background: rgba(255, 0, 0, 0); /* 🔴 red overlay (testing) */
-}
-
-/* Bottom 30% blocked */
-.bottom-block {
-  bottom: 0;
-  height: 15%;
-  background: rgba(0, 0, 255, 0); /* 🔵 blue overlay (testing) */
-}
 
 
-/* ---------- DETAILS ---------- */
 
 .details {
   padding: 20px;
@@ -209,3 +184,4 @@ iframe {
 .source p {
   font-size: 13px;
 }
+
