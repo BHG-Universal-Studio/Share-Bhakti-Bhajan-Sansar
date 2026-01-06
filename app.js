@@ -70,9 +70,6 @@ muteBtn.addEventListener("click", () => {
 });
 
 
-function openInYouTube() {
-  window.open(`https://www.youtube.com/watch?v=${videoId}`, "_blank");
-}
 
 function openInPlayStore() {
  window.location.href = "https://play.google.com/store/apps/details?id=com.BHG.bhakti";
