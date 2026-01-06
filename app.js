@@ -60,46 +60,16 @@ muteBtn.addEventListener("click", () => {
     `&fs=0` +
     `&disablekb=1`;
 
-  muteBtn.style.display = "none"; // optional: hide after use
+  muteBtn.style.display = "none"; 
 });
 
-/* External credit (policy safe) */
+
 function openInYouTube() {
   window.open(`https://www.youtube.com/watch?v=${videoId}`, "_blank");
 }
 
-function openInApp() {
-  if (!videoId) return;
-
-  const appUrl = `bhaktibhajan://video/${videoId}`;
-  const playStoreUrl =
-    "https://play.google.com/store/apps/details?id=com.BHG.bhakti";
-
-  let didAppOpen = false;
-
-  // Detect if app opened (page hidden)
-  const onVisibilityChange = () => {
-    if (document.hidden) {
-      didAppOpen = true;
-      cleanup();
-    }
-  };
-
-  const cleanup = () => {
-    document.removeEventListener("visibilitychange", onVisibilityChange);
-  };
-
-  document.addEventListener("visibilitychange", onVisibilityChange);
-
-  // Try opening app
-  window.location.href = appUrl;
-
-  // Fallback to Play Store ONLY if app didn't open
-  setTimeout(() => {
-    if (!didAppOpen) {
-      window.location.href = playStoreUrl;
-    }
-  }, 1800);
-}
+setTimeout(function() {
+      window.location.href = "https://play.google.com/store/apps/details?id=com.BHG.bhakti";
+  }, 2000);
 
 
