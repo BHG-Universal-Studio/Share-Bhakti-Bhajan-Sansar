@@ -9,7 +9,7 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* ---------- VIDEO ---------- */
+
 
 .video-container {
   position: relative;
@@ -193,5 +193,6 @@ iframe {
 .playstore img {
   width: 200px;
 }
+
 
 
