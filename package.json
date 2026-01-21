@@ -1,0 +1,7 @@
+{
+  "name": "share-bhakti-bhajan-sansar",
+  "private": true,
+  "dependencies": {
+    "@cloudflare/pages-plugin-image-response": "^1.0.0"
+  }
+}
