@@ -2,10 +2,8 @@ export async function onRequest(context) {
   const url = new URL(context.request.url);
   const videoId = url.pathname.replace("/", "").trim();
 
-  // 👉 Use dynamically generated portrait OG image
-  const ogImage = videoId
-    ? `${url.origin}/og/${videoId}`
-    : `${url.origin}/logo.png`;
+  // ✅ IMPORTANT: use PNG endpoint for WhatsApp
+  const ogImage = `${url.origin}/ogpng/${videoId}`;
 
   // Fetch the real index.html from Pages
   const asset = await context.env.ASSETS.fetch(
@@ -26,6 +24,7 @@ export async function onRequest(context) {
 <meta property="og:image" content="${ogImage}" />
 <meta property="og:image:width" content="1080" />
 <meta property="og:image:height" content="1920" />
+<meta property="og:image:type" content="image/png" />
 <meta property="og:url" content="${url.href}" />
 <meta name="twitter:card" content="summary_large_image" />
 </head>`
