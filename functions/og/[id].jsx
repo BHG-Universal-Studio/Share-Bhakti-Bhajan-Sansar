@@ -1,3 +1,5 @@
+import { ImageResponse } from "@cloudflare/pages-plugin-image-response";
+
 export async function onRequest({ params }) {
   const videoId = params.id;
 
@@ -14,10 +16,13 @@ export async function onRequest({ params }) {
           height: "1920px",
           position: "relative",
           overflow: "hidden",
-          backgroundColor: "#000"
+          backgroundColor: "#000",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
         }}
       >
-        {/* Background (center-cropped portrait) */}
+        {/* Background image (portrait crop) */}
         <img
           src={thumbnail}
           style={{
@@ -28,7 +33,7 @@ export async function onRequest({ params }) {
           }}
         />
 
-        {/* Dark gradient overlay */}
+        {/* Gradient overlay */}
         <div
           style={{
             position: "absolute",
@@ -38,7 +43,7 @@ export async function onRequest({ params }) {
           }}
         />
 
-        {/* App logo overlay */}
+        {/* App logo */}
         <img
           src={logo}
           style={{
