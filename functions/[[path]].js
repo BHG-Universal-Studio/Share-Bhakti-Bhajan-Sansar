@@ -2,9 +2,10 @@ export async function onRequest(context) {
   const url = new URL(context.request.url);
   const videoId = url.pathname.replace("/", "").trim();
 
+  // 👉 Use dynamically generated portrait OG image
   const ogImage = videoId
-    ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
-    : "https://bhakti-bhajan-sansar.pages.dev/logo.png";
+    ? `${url.origin}/og/${videoId}`
+    : `${url.origin}/logo.png`;
 
   // Fetch the real index.html from Pages
   const asset = await context.env.ASSETS.fetch(
@@ -23,15 +24,16 @@ export async function onRequest(context) {
 <meta property="og:description"
       content="लाइव भजन, आरती, मंत्र और आध्यात्मिक वीडियो देखें — भक्ति भजन संसार" />
 <meta property="og:image" content="${ogImage}" />
-<meta property="og:image:width" content="1280" />
-<meta property="og:image:height" content="720" />
+<meta property="og:image:width" content="1080" />
+<meta property="og:image:height" content="1920" />
 <meta property="og:url" content="${url.href}" />
 <meta name="twitter:card" content="summary_large_image" />
 </head>`
   );
 
   return new Response(html, {
-    headers: { "Content-Type": "text/html; charset=UTF-8" }
+    headers: {
+      "Content-Type": "text/html; charset=UTF-8"
+    }
   });
 }
-
