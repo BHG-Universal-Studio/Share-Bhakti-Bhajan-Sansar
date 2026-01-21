@@ -1,52 +1,58 @@
 export async function onRequest({ params }) {
   const videoId = params.id;
 
-  const thumbnail =
+  const thumbUrl =
     `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-  const logo =
+  const logoUrl =
     "https://bhakti-bhajan-sansar.pages.dev/logo.png";
 
-  const svg = `
-<svg width="1080" height="1920" viewBox="0 0 1080 1920"
-     xmlns="http://www.w3.org/2000/svg">
+  // Fetch images
+  const [thumbRes, logoRes] = await Promise.all([
+    fetch(thumbUrl),
+    fetch(logoUrl)
+  ]);
 
-  <!-- Background image (center cropped portrait) -->
-  <image
-    href="${thumbnail}"
-    x="-420"
-    y="420"
-    width="1920"
-    height="1080"
-    transform="rotate(-90 540 960)"
-    preserveAspectRatio="xMidYMid slice"
-  />
+  const thumbBlob = await thumbRes.blob();
+  const logoBlob = await logoRes.blob();
 
-  <!-- Dark gradient overlay -->
-  <defs>
-    <linearGradient id="g" x1="0" y1="1" x2="0" y2="0">
-      <stop offset="0%" stop-color="black" stop-opacity="0.75"/>
-      <stop offset="100%" stop-color="black" stop-opacity="0.15"/>
-    </linearGradient>
-  </defs>
+  // Create canvas
+  const canvas = new OffscreenCanvas(1080, 1920);
+  const ctx = canvas.getContext("2d");
 
-  <rect width="1080" height="1920" fill="url(#g)" />
+  // Decode images
+  const thumbBitmap = await createImageBitmap(thumbBlob);
+  const logoBitmap = await createImageBitmap(logoBlob);
 
-  <!-- App logo -->
-  <image
-    href="${logo}"
-    x="880"
-    y="1660"
-    width="160"
-    height="160"
-    rx="32"
-    ry="32"
-  />
+  // Draw rotated background
+  ctx.save();
+  ctx.translate(540, 960);
+  ctx.rotate(-Math.PI / 2);
+  ctx.drawImage(
+    thumbBitmap,
+    -960,
+    -540,
+    1920,
+    1080
+  );
+  ctx.restore();
 
-</svg>`;
+  // Gradient overlay
+  const gradient = ctx.createLinearGradient(0, 1920, 0, 0);
+  gradient.addColorStop(0, "rgba(0,0,0,0.75)");
+  gradient.addColorStop(1, "rgba(0,0,0,0.15)");
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, 1080, 1920);
 
-  return new Response(svg, {
+  // Logo overlay
+  ctx.drawImage(logoBitmap, 880, 1660, 160, 160);
+
+  // Export PNG
+  const pngBlob = await canvas.convertToBlob({ type: "image/png" });
+  const buffer = await pngBlob.arrayBuffer();
+
+  return new Response(buffer, {
     headers: {
-      "Content-Type": "image/svg+xml",
+      "Content-Type": "image/png",
       "Cache-Control": "public, max-age=86400"
     }
   });
