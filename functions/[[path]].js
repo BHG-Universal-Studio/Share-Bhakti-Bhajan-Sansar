@@ -2,8 +2,9 @@ export async function onRequest(context) {
   const url = new URL(context.request.url);
   const videoId = url.pathname.replace("/", "").trim();
 
-  // ✅ IMPORTANT: use PNG endpoint for WhatsApp
-  const ogImage = `${url.origin}/ogpng/${videoId}`;
+
+  const ogImage = `${url.origin}/og/${videoId}`;
+
 
   // Fetch the real index.html from Pages
   const asset = await context.env.ASSETS.fetch(
@@ -36,3 +37,4 @@ export async function onRequest(context) {
     }
   });
 }
+
