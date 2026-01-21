@@ -22,7 +22,6 @@ export async function onRequest({ params }) {
           alignItems: "center"
         }}
       >
-        {/* Background image (portrait crop) */}
         <img
           src={thumbnail}
           style={{
@@ -33,7 +32,6 @@ export async function onRequest({ params }) {
           }}
         />
 
-        {/* Gradient overlay */}
         <div
           style={{
             position: "absolute",
@@ -43,7 +41,6 @@ export async function onRequest({ params }) {
           }}
         />
 
-        {/* App logo */}
         <img
           src={logo}
           style={{
