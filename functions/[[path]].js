@@ -2,9 +2,9 @@ export async function onRequest(context) {
   const url = new URL(context.request.url);
   const videoId = url.pathname.replace("/", "").trim();
 
-
-  const ogImage = `${url.origin}/og/${videoId}`;
-
+  const ogImage = videoId
+    ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
+    : "https://bhakti-bhajan-sansar.pages.dev/logo.png";
 
   // Fetch the real index.html from Pages
   const asset = await context.env.ASSETS.fetch(
@@ -25,16 +25,12 @@ export async function onRequest(context) {
 <meta property="og:image" content="${ogImage}" />
 <meta property="og:image:width" content="1080" />
 <meta property="og:image:height" content="1920" />
-<meta property="og:image:type" content="image/png" />
 <meta property="og:url" content="${url.href}" />
 <meta name="twitter:card" content="summary_large_image" />
 </head>`
   );
 
   return new Response(html, {
-    headers: {
-      "Content-Type": "text/html; charset=UTF-8"
-    }
+    headers: { "Content-Type": "text/html; charset=UTF-8" }
   });
 }
-
