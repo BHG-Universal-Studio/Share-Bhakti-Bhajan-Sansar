@@ -3,7 +3,7 @@ export async function onRequest(context) {
   const videoId = url.pathname.replace("/", "").trim();
 
   const ogImage = videoId
-    ? `${url.origin}/og/${videoId}`
+    ? `https://res.cloudinary.com/bhguniversalstudio/image/fetch/c_fill,g_center,w_1080,h_1920,f_jpg,q_auto/https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
     : `${url.origin}/logo.png`;
 
   const asset = await context.env.ASSETS.fetch(
@@ -23,7 +23,7 @@ export async function onRequest(context) {
 <meta property="og:image" content="${ogImage}" />
 <meta property="og:image:width" content="1080" />
 <meta property="og:image:height" content="1920" />
-<meta property="og:image:type" content="image/png" />
+<meta property="og:image:type" content="image/jpeg" />
 <meta property="og:url" content="${url.href}" />
 <meta name="twitter:card" content="summary_large_image" />
 </head>`
