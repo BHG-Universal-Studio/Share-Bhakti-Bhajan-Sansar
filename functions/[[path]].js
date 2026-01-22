@@ -2,16 +2,19 @@ export async function onRequest(context) {
   const url = new URL(context.request.url);
   const videoId = url.pathname.replace("/", "").trim();
 
+  // ✅ Cloudinary portrait OG image with center overlay
   const ogImage = videoId
-    ? `https://res.cloudinary.com/bhguniversalstudio/image/fetch/c_fill,g_center,w_1080,h_1920,f_jpg,q_auto/https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
+    ? `https://res.cloudinary.com/bhguniversalstudio/image/fetch/c_fill,g_center,w_1080,h_1920/l_play_circle_eicztn,g_center,w_260,fl_layer_apply/f_jpg,q_auto/https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
     : `${url.origin}/logo.png`;
 
+  // Fetch the real index.html from Pages
   const asset = await context.env.ASSETS.fetch(
     new Request(`${url.origin}/index.html`)
   );
 
   let html = await asset.text();
 
+  // 🔥 Inject OG tags dynamically
   html = html.replace(
     "</head>",
     `
@@ -30,6 +33,8 @@ export async function onRequest(context) {
   );
 
   return new Response(html, {
-    headers: { "Content-Type": "text/html; charset=UTF-8" }
+    headers: {
+      "Content-Type": "text/html; charset=UTF-8"
+    }
   });
 }
