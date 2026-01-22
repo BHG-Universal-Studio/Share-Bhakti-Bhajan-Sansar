@@ -102,19 +102,39 @@ iframe {
   justify-content: center;
 }
 
-.trending-badge {
-  position: absolute;
-  top: 44px;
-  left: 12px;
-  z-index: 7;
+.below-video-badge span {
   background: linear-gradient(135deg, #ff9f00, #ff6a00);
   color: #000;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 6px 10px;
+  font-size: 12px;          /* ⬇️ smaller */
+  font-weight: 700;
+  padding: 6px 12px;        /* ⬇️ tighter */
   border-radius: 999px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+  white-space: nowrap;
 }
+
+.below-video-badge {
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+}
+
+.below-video-badge span {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
 
 .scroll-hint {
   margin-top: 14px;
