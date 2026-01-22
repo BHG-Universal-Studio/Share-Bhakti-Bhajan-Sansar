@@ -3,17 +3,15 @@ export async function onRequest(context) {
   const videoId = url.pathname.replace("/", "").trim();
 
   const ogImage = videoId
-    ? `${url.origin}/cdn-cgi/image/width=1080,height=1920,fit=cover,format=jpg/https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
+    ? `${url.origin}/og/${videoId}`
     : `${url.origin}/logo.png`;
 
-  // Fetch the real index.html from Pages
   const asset = await context.env.ASSETS.fetch(
     new Request(`${url.origin}/index.html`)
   );
 
   let html = await asset.text();
 
-  // 🔥 Inject OG tags dynamically
   html = html.replace(
     "</head>",
     `
@@ -25,7 +23,7 @@ export async function onRequest(context) {
 <meta property="og:image" content="${ogImage}" />
 <meta property="og:image:width" content="1080" />
 <meta property="og:image:height" content="1920" />
-<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:type" content="image/png" />
 <meta property="og:url" content="${url.href}" />
 <meta name="twitter:card" content="summary_large_image" />
 </head>`
