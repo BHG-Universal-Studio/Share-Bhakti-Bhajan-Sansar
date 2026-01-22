@@ -14,9 +14,12 @@ body {
 .video-container {
   position: relative;
   width: 100%;
-  aspect-ratio: 9 / 16;
-  max-height: 90vh;
+  max-width: 420px;          /* ✅ SAME SIZE ON ALL SCREENS */
+  height: 75vh;              /* ✅ ~80% OF SCREEN */
+  max-height: 620px;         /* ✅ NEVER FULL SCREEN */
+  margin: 16px auto 0;       /* ✅ CENTER + TOP GAP */
   background: #000;
+  border-radius: 18px;       /* ✅ MODERN LOOK */
   overflow: hidden;
 }
 
@@ -63,47 +66,91 @@ iframe {
 
 
 .details {
-  padding: 20px;
+  padding: 24px 20px;
+  text-align: center;              /* ✅ CENTER GRAVITY */
+  max-width: 720px;                /* ✅ READABLE WIDTH */
+  margin: 0 auto;                  /* ✅ CENTER BLOCK */
 }
 
 .details h1 {
   margin: 0;
-  font-size: 24px;
+  font-size: 28px;                 /* ⬆️ slightly bigger */
+  font-weight: 800;
+  color: #f5b301;                  /* ✅ SAME YELLOW */
+  letter-spacing: 0.5px;
 }
 
+
 .subtitle {
-  opacity: 0.7;
-  margin-top: 6px;
+  opacity: 0.75;
+  margin-top: 8px;
+  font-size: 15px;
 }
 
 .desc {
-  margin-top: 12px;
-  line-height: 1.6;
+  margin-top: 14px;
+  line-height: 1.7;
   opacity: 0.9;
+  font-size: 15px;
 }
 
 .features {
-  margin-top: 20px;
+  margin-top: 22px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 12px;
+  justify-content: center;
 }
 
-.features div {
-  background: #2c2c2c;
-  padding: 12px;
-  border-radius: 10px;
-  text-align: center;
-  font-size: 14px;
+.trending-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 7;
+  background: linear-gradient(135deg, #ff9f00, #ff6a00);
+  color: #000;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
 }
+
+.scroll-hint {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 16px;                 /* ⬆️ bigger */
+  font-weight: 600;
+  color: #f5b301;                  /* ✅ highlight */
+  animation: bounce 1.6s infinite;
+}
+
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+
+.features div {
+  background: #1f1f1f;
+  padding: 14px 10px;
+  border-radius: 14px;
+  font-size: 14px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+
 /* App open button with logo */
 .app-open-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 200px;
+  width: 260px;                    /* ⬆️ wider */
   gap: 10px;
+  white-space: nowrap;             /* ✅ FORCE 1 LINE */
 }
+
 
 /* Logo inside button */
 .app-open-btn img {
@@ -182,13 +229,24 @@ iframe {
 
 
 .primary {
-  padding: 14px;
-  border-radius: 12px;
+  padding: 14px 18px;
+  border-radius: 14px;
   border: none;
   font-size: 16px;
-  background: #684c06;
-  color: #fff;
+  font-weight: 700;
+  background: linear-gradient(135deg, #f5b301, #ff9800);
+  color: #000;                     /* ✅ better contrast */
+  cursor: pointer;
+  animation: pulse 2.5s infinite;
 }
+
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(160,118,8,0.5); }
+  70% { box-shadow: 0 0 0 12px rgba(160,118,8,0); }
+  100% { box-shadow: 0 0 0 0 rgba(160,118,8,0); }
+}
+
 
 .playstore img {
   width: 200px;
