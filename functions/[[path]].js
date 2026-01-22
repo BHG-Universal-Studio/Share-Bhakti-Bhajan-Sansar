@@ -7,7 +7,7 @@ export async function onRequest(context) {
     ? `https://res.cloudinary.com/bhguniversalstudio/image/fetch/c_fill,g_center,w_1080,h_1920/l_play_i3pryq,g_center,w_260,fl_layer_apply/f_jpg,q_auto/https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
     : `${url.origin}/logo.png`;
 
-  // Fetch the real index.html from Pages
+  
   const asset = await context.env.ASSETS.fetch(
     new Request(`${url.origin}/index.html`)
   );
@@ -38,6 +38,7 @@ export async function onRequest(context) {
     }
   });
 }
+
 
 
 
