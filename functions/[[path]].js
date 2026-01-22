@@ -4,7 +4,7 @@ export async function onRequest(context) {
 
   // ✅ Cloudinary portrait OG image with center overlay
   const ogImage = videoId
-    ? `https://res.cloudinary.com/bhguniversalstudio/image/fetch/c_fill,g_center,w_1080,h_1920/l_play_circle_eicztn,g_center,w_260,fl_layer_apply/f_jpg,q_auto/https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
+    ? `https://res.cloudinary.com/bhguniversalstudio/image/fetch/c_fill,g_center,w_1080,h_1920/l_play_circle_u0mx9r,g_center,w_260,fl_layer_apply/f_jpg,q_auto/https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
     : `${url.origin}/logo.png`;
 
   // Fetch the real index.html from Pages
@@ -38,3 +38,4 @@ export async function onRequest(context) {
     }
   });
 }
+
